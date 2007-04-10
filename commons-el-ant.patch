@@ -1,0 +1,20 @@
+--- commons-el-1.0-src/build.xml	2007-04-11 01:59:03.625343169 +0300
++++ commons-el-1.0-src/build.xml	2007-04-11 02:19:41.683291922 +0300
+@@ -172,7 +172,8 @@
+            destdir="${build.home}/classes"
+              debug="${compile.debug}"
+        deprecation="${compile.deprecation}"
+-          optimize="${compile.optimize}">
++          optimize="${compile.optimize}"
++            source="${compile.source}">
+       <classpath refid="compile.classpath"/>
+     </javac>
+     <copy    todir="${build.home}/classes" filtering="on">
+@@ -218,6 +219,7 @@
+                  author="true"
+                 private="true"
+                 version="true"
++:                source="${compile.source}"
+                overview="src/java/overview.html"
+                doctitle="&lt;h1&gt;${component.title} (Version ${component.version})&lt;/h1&gt;"
+             windowtitle="${component.title} (Version ${component.version})"
