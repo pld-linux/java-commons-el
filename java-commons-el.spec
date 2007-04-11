@@ -1,19 +1,13 @@
-#
-# Conditional build:
-%bcond_with	bootstrap	# bootstrap (using binary servletapi5/jsp)
-#
 %include	/usr/lib/rpm/macros.java
 Summary:	The Jakarta Commons Extension Language
 Summary(pl.UTF-8):	Jakarta Commons Extension Language - język rozszerzeń Jakarta Commons
 Name:		commons-el
 Version:	1.0
-Release:	0.1
+Release:	1
 License:	Apache Software License
 Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/el/source/%{name}-%{version}-src.tar.gz
 # Source0-md5:	25038283a0b5f638db5e891295d20020
-Source1:	http://www.apache.org/dist/tomcat/tomcat-5/v5.5.23/bin/apache-tomcat-5.5.23.zip
-# Source1-md5:	4a7e5c2ff3c20a114fbfc5a122d7247c
 Patch0:		%{name}-license.patch
 Patch1:		%{name}-ant.patch
 URL:		http://jakarta.apache.org/commons/el/
@@ -22,10 +16,8 @@ BuildRequires:	jpackage-utils >= 0:1.6
 BuildRequires:	junit
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-%if %{without bootstrap}
 BuildRequires:	jsp
 BuildRequires:	servletapi5
-%endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -50,28 +42,16 @@ Javadoc for %{name}.
 Dokumentacja javadoc dla commons-el.
 
 %prep
-%setup -q -n %{name}-%{version}-src %{?with_bootstrap:-a1}
+%setup -q -n %{name}-%{version}-src
 %patch0 -p1
 %patch1 -p1
-%if %{with bootstrap}
-ln -s apache-tomcat-* tomcat
-%endif
 
 %build
-%if %{with bootstrap}
-dir=$(pwd)
-servlet_api=$dir/tomcat/common/lib/servlet-api.jar
-jsp_api=$dir/tomcat/common/lib/jsp-api.jar
-%else
-servlet_api=$(build-classpath build-classpath servletapi5)
-jsp_api=$(build-classpath build-classpath jspapi)
-%endif
-
 cat > build.properties <<EOF
 build.compiler=modern
+servlet-api.jar=$(build-classpath servlet-api)
+jsp-api.jar=$(build-classpath jsp-api)
 junit.jar=$(build-classpath junit)
-servlet-api.jar=$servlet_api
-jsp-api.jar=$jsp_api
 servletapi.build.notrequired=true
 jspapi.build.notrequired=true
 EOF
