@@ -4,18 +4,19 @@
 #
 %include	/usr/lib/rpm/macros.java
 Summary:	The Jakarta Commons Extension Language
+Summary(pl.UTF-8):	Jakarta Commons Extension Language - język rozszerzeń Jakarta Commons
 Name:		commons-el
 Version:	1.0
 Release:	0.1
 License:	Apache Software License
 Group:		Development/Languages/Java
-URL:		http://jakarta.apache.org/commons/el/
 Source0:	http://www.apache.org/dist/jakarta/commons/el/source/%{name}-%{version}-src.tar.gz
 # Source0-md5:	25038283a0b5f638db5e891295d20020
 Source1:	http://www.apache.org/dist/tomcat/tomcat-5/v5.5.23/bin/apache-tomcat-5.5.23.zip
 # Source1-md5:	4a7e5c2ff3c20a114fbfc5a122d7247c
 Patch0:		%{name}-license.patch
 Patch1:		%{name}-ant.patch
+URL:		http://jakarta.apache.org/commons/el/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils >= 0:1.6
 BuildRequires:	junit
@@ -32,13 +33,21 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 An implementation of standard interfaces and abstract classes for
 javax.servlet.jsp.el which is part of the JSP 2.0 specification.
 
+%description -l pl.UTF-8
+Implementacja standardowych interfejsów i klas abstrakcyjnych dla
+javax.servlet.jsp.el, będących częścią specyfikacji JSP 2.0.
+
 %package javadoc
 Summary:	Javadoc for %{name}
+Summary(pl.UTF-8):	Dokumentacja javadoc dla commons-el
 Group:		Documentation
 Requires:	jpackage-utils
 
-%description    javadoc
+%description javadoc
 Javadoc for %{name}.
+
+%description javadoc -l pl.UTF-8
+Dokumentacja javadoc dla commons-el.
 
 %prep
 %setup -q -n %{name}-%{version}-src %{?with_bootstrap:-a1}
