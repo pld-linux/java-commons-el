@@ -14,7 +14,7 @@
                   author="true"
                  private="true"
                  version="true"
-+:                source="${compile.source}"
++                source="${compile.source}"
                 overview="src/java/overview.html"
                 doctitle="&lt;h1&gt;${component.title} (Version ${component.version})&lt;/h1&gt;"
              windowtitle="${component.title} (Version ${component.version})"
