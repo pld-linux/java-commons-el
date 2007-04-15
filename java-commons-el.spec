@@ -1,5 +1,3 @@
-# TODO
-# spec vs Name
 %include	/usr/lib/rpm/macros.java
 Summary:	The Jakarta Commons Extension Language
 Summary(pl.UTF-8):	Jakarta Commons Extension Language - język rozszerzeń Jakarta Commons
