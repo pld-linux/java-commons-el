@@ -13,10 +13,10 @@ Patch1:		commons-el-ant.patch
 URL:		http://jakarta.apache.org/commons/el/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils >= 0:1.6
+BuildRequires:	jsp
 BuildRequires:	junit
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-BuildRequires:	jsp
 BuildRequires:	servletapi5
 Obsoletes:	commons-el
 BuildArch:	noarch
