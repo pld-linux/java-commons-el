@@ -3,7 +3,7 @@ Summary:	The Jakarta Commons Extension Language
 Summary(pl.UTF-8):	Jakarta Commons Extension Language - język rozszerzeń Jakarta Commons
 Name:		jakarta-commons-el
 Version:	1.0
-Release:	1
+Release:	2
 License:	Apache Software License
 Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/el/source/commons-el-%{version}-src.tar.gz
@@ -17,8 +17,9 @@ BuildRequires:	jsp
 BuildRequires:	junit
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-BuildRequires:	servletapi5
+BuildRequires:	servlet
 Obsoletes:	commons-el
+Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -51,9 +52,10 @@ Dokumentacja javadoc dla commons-el.
 %build
 cat > build.properties <<EOF
 build.compiler=modern
-servlet-api.jar=$(build-classpath servlet-api)
-jsp-api.jar=$(build-classpath jsp-api)
-junit.jar=$(build-classpath junit)
+servlet-api.jar=$(find-jar servlet)
+jsp-api.jar=$(find-jar jsp-api)
+junit.jar=$(find-jar junit)
+
 servletapi.build.notrequired=true
 jspapi.build.notrequired=true
 EOF
@@ -67,22 +69,21 @@ EOF
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javadir}
-for a in dist/*.jar; do
-	jar=${a##*/}
-	cp -a dist/$jar $RPM_BUILD_ROOT%{_javadir}/${jar%%.jar}-%{version}.jar
-	ln -s ${jar%%.jar}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/$jar
-done
+
+# jars
+cp -a dist/commons-el.jar $RPM_BUILD_ROOT%{_javadir}/commons-el-%{version}.jar
+ln -s commons-el-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-el.jar
 
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr dist/docs/api/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -a dist/docs/api/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post javadoc
-ln -sf %{name}-%{version} %{_javadocdir}/%{name}
+ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
