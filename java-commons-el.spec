@@ -1,11 +1,15 @@
+#
+# Conditional build:
+%bcond_without	javadoc		# don't build javadoc
+
 %include	/usr/lib/rpm/macros.java
 Summary:	The Jakarta Commons Extension Language
 Summary(pl.UTF-8):	Jakarta Commons Extension Language - język rozszerzeń Jakarta Commons
 Name:		jakarta-commons-el
 Version:	1.0
 Release:	2
-License:	Apache Software License
-Group:		Development/Languages/Java
+License:	Apache
+Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/el/source/commons-el-%{version}-src.tar.gz
 # Source0-md5:	25038283a0b5f638db5e891295d20020
 Patch0:		commons-el-license.patch
@@ -18,8 +22,10 @@ BuildRequires:	junit
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	servlet
-Obsoletes:	commons-el
 Requires:	jpackage-utils
+Provides:	jakarta-commons-el
+Obsoletes:	commons-el
+Obsoletes:	jakarta-commons-el
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -75,9 +81,11 @@ cp -a dist/commons-el.jar $RPM_BUILD_ROOT%{_javadir}/commons-el-%{version}.jar
 ln -s commons-el-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-el.jar
 
 # javadoc
+%if %{with javadoc}
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -a dist/docs/api/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -90,7 +98,9 @@ ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
 %doc LICENSE.txt STATUS.html
 %{_javadir}/*.jar
 
+%if %{with javadoc}
 %files javadoc
 %defattr(644,root,root,755)
 %{_javadocdir}/%{name}-%{version}
 %ghost %{_javadocdir}/%{name}
+%endif
