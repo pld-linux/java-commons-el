@@ -3,18 +3,18 @@
 %bcond_without	javadoc		# don't build javadoc
 
 %include	/usr/lib/rpm/macros.java
-Summary:	The Jakarta Commons Extension Language
-Summary(pl.UTF-8):	Jakarta Commons Extension Language - język rozszerzeń Jakarta Commons
-Name:		jakarta-commons-el
+Summary:	The Commons Extension Language
+Summary(pl.UTF-8):	Commons Extension Language - język rozszerzeń Commons
+Name:		java-commons-el
 Version:	1.0
 Release:	2
 License:	Apache
 Group:		Libraries/Java
-Source0:	http://www.apache.org/dist/jakarta/commons/el/source/commons-el-%{version}-src.tar.gz
+Source0:	http://www.apache.org/dist/commons/el/source/commons-el-%{version}-src.tar.gz
 # Source0-md5:	25038283a0b5f638db5e891295d20020
 Patch0:		commons-el-license.patch
 Patch1:		commons-el-ant.patch
-URL:		http://jakarta.apache.org/commons/el/
+URL:		http://commons.apache.org/commons/el/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils >= 0:1.6
 BuildRequires:	jsp
