@@ -42,7 +42,9 @@ Summary:	Javadoc for commons-el
 Summary(pl.UTF-8):	Dokumentacja javadoc dla commons-el
 Group:		Documentation
 Requires:	jpackage-utils
+Provides:	jakarta-commons-el-javadoc
 Obsoletes:	commons-el-javadoc
+Obsoletes:	jakarta-commons-el-javadoc
 
 %description javadoc
 Javadoc for commons-el.
