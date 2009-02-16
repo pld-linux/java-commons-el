@@ -107,7 +107,7 @@ ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
-%doc STATUS.html
+%doc PROPOSAL.html RELEASE-NOTES.txt STATUS.html
 %{_javadir}/*.jar
 
 %if %{with javadoc}
