@@ -1,6 +1,11 @@
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
+%if "%{pld_release}" == "ti"
+%bcond_without	java_sun	# build with gcj
+%else
+%bcond_with	java_sun	# build with java-sun
+%endif
 
 %include	/usr/lib/rpm/macros.java
 
@@ -18,10 +23,12 @@ Patch0:		commons-el-license.patch
 Patch1:		commons-el-ant.patch
 URL:		http://commons.apache.org/commons/el/
 BuildRequires:	ant
-BuildRequires:	java-gcj-compat-devel
+%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
+%{?with_java_sun:BuildRequires:	java-sun}
 BuildRequires:	jpackage-utils >= 0:1.6
 BuildRequires:	jsp
 BuildRequires:	junit
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	servlet
@@ -74,15 +81,8 @@ EOF
 %ant	-Dcompile.source=1.4 \
 	-Dfinal.name=commons-el \
 	-Dj2se.javadoc=%{_javadocdir}/java \
-	jar
-
-%if %{with javadoc}
-export SHELL=/bin/sh
-%ant	-Dcompile.source=1.4 \
-	-Dfinal.name=commons-el \
-	-Dj2se.javadoc=%{_javadocdir}/java \
-	javadoc
-%endif
+	jar \
+	%{?with_javadoc:javadoc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
