@@ -70,7 +70,7 @@ Dokumentacja javadoc dla commons-el.
 %build
 cat > build.properties <<EOF
 build.compiler=extJavac
-servlet-api.jar=$(find-jar servlet)
+servlet-api.jar=$(find-jar servlet-api)
 jsp-api.jar=$(find-jar jsp-api)
 junit.jar=$(find-jar junit)
 
