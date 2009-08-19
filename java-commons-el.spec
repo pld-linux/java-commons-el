@@ -78,6 +78,11 @@ servletapi.build.notrequired=true
 jspapi.build.notrequired=true
 EOF
 
+if grep '=$' build.properties; then
+	: Some .jar could not be found
+	exit 1
+fi
+
 %ant	-Dcompile.source=1.4 \
 	-Dfinal.name=commons-el \
 	-Dj2se.javadoc=%{_javadocdir}/java \
