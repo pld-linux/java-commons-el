@@ -9,20 +9,21 @@ Summary:	The Commons Extension Language
 Summary(pl.UTF-8):	Commons Extension Language - język rozszerzeń Commons
 Name:		java-commons-el
 Version:	1.0
-Release:	4
+Release:	5
 License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/el/source/commons-el-%{version}-src.tar.gz
 # Source0-md5:	25038283a0b5f638db5e891295d20020
 Patch0:		commons-el-license.patch
 Patch1:		commons-el-ant.patch
+Patch2:		commons-el-eclipse-manifest.patch
 URL:		http://commons.apache.org/el/
 BuildRequires:	ant
 BuildRequires:	java(jsp)
 BuildRequires:	java(servlet)
 BuildRequires:	jdk
 BuildRequires:	jpackage-utils >= 0:1.6
-BuildRequires:	junit
+BuildRequires:	java-junit
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 Requires:	jpackage-utils
@@ -59,6 +60,7 @@ Dokumentacja javadoc dla commons-el.
 %setup -q -n commons-el-%{version}-src
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cat > build.properties <<EOF
