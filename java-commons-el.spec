@@ -57,9 +57,9 @@ Dokumentacja javadoc dla commons-el.
 
 %prep
 %setup -q -n commons-el-%{version}-src
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 
 %build
 cat > build.properties <<EOF
