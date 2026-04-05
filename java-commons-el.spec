@@ -2,13 +2,15 @@
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
 
+%{?use_default_jdk:%use_default_jdk 8}
+
 
 %define		srcname	commons-el
 Summary:	The Commons Extension Language
 Summary(pl.UTF-8):	Commons Extension Language - język rozszerzeń Commons
 Name:		java-commons-el
 Version:	1.0
-Release:	5
+Release:	6
 License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/el/source/commons-el-%{version}-src.tar.gz
@@ -20,11 +22,11 @@ URL:		http://commons.apache.org/el/
 BuildRequires:	ant
 BuildRequires:	java(jsp)
 BuildRequires:	java(servlet)
-BuildRequires:	jdk
+%buildrequires_jdk
 BuildRequires:	jpackage-utils >= 0:1.6
 BuildRequires:	java-junit
 BuildRequires:	rpm-javaprov
-BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	rpmbuild(macros) >= 1.556
 Requires:	jpackage-utils
 Provides:	jakarta-commons-el
 Obsoletes:	commons-el
